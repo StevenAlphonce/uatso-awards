@@ -18,8 +18,8 @@
       <li class=""><a href="votes.php"><span class="glyphicon glyphicon-lock"></span> <span>Votes</span></a></li>
       <li class="header">MANAGE</li>
       <li class=""><a href="voters.php"><i class="fa fa-users"></i> <span>Voters</span></a></li>
-      <li class=""><a href="positions.php"><i class="fa fa-tasks"></i> <span>Category</span></a></li>
-      <li class=""><a href="candidates.php"><i class="fa fa-black-tie"></i> <span>Nominee</span></a></li>
+      <li class=""><a href="positions.php"><i class="fa fa-tasks"></i> <span>Categories</span></a></li>
+      <li class=""><a href="candidates.php"><i class="fa fa-black-tie"></i> <span>Nominees</span></a></li>
       <li class="header">SETTINGS</li>
       <li class=""><a href="ballot.php"><i class="fa fa-file-text"></i> <span>Nominees Ballots</span></a></li>
       <li class=""><a href="#config" data-toggle="modal"><i class="fa fa-cog"></i> <span>Award Title</span></a></li>
