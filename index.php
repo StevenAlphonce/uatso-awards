@@ -17,11 +17,19 @@ if (isset($_SESSION['voter'])) {
 		<!-- Header Navbar: style can be found in header.less -->
 		<nav class="navbar navbar-static-top">
 
+			<div class="navbar-header">
+				<a href="login.php" class="navbar-brand"><b>UAUTS'o </b> awards</a>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+					<i class="fa fa-bars"></i>
+				</button>
+			</div>
+
 			<div class="navbar-custom-menu">
 				<ul style="margin-top: 10px;font-size:large;" class="nav navbar-nav">
 					<li><a style="color:white;background:unset; " href="results.php">SHOW RESULTS</a> </li>
 
 				</ul>
+
 			</div>
 		</nav>
 	</header>

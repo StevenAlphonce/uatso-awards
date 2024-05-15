@@ -3,6 +3,29 @@
 <?php include 'includes/header.php'; ?>
 
 <body class="hold-transition skin-blue layout-top-nav">
+
+	<header class="main-header bg-blue">
+
+		<!-- Header Navbar: style can be found in header.less -->
+		<nav class="navbar navbar-static-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a href="login.php" class="navbar-brand"><b>UAUTS'o </b> awards</a>
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+						<i class="fa fa-bars"></i>
+					</button>
+				</div>
+
+				<!-- <div class="navbar-custom-menu">
+					<ul style="margin-top: 10px;font-size:large;" class="nav navbar-nav">
+						<li><a style="color:white;background:unset; " href="results.php">SHOW RESULTS</a> </li>
+
+					</ul>
+				</div> -->
+			</div>
+
+		</nav>
+	</header>
 	<div class="wrapper">
 
 		<?php include 'includes/conn.php'; ?>
@@ -23,6 +46,7 @@
 						<?php
 						$sql = "SELECT * FROM positions ORDER BY priority ASC";
 						$query = $conn->query($sql);
+
 						while ($row = $query->fetch_assoc()) {
 							$position_name = $row['description']; // Assuming the position name field in your database is 'position_name'
 							echo '<div class="col-md-12 mb-4">';
@@ -39,25 +63,28 @@
 									<div class="col-md-9 align-self-center">
 										<h4 class="mt-3 fs-5 mb-1 fw-bold"><?php echo $crow['firstname'] . ' ' . $crow['lastname']; ?></h4> <!-- Assuming candidate name field in your database is 'candidate_name' -->
 										<?php
-										$sql = "SELECT COUNT(*) AS count FROM votes WHERE candidate_id='" . $crow['id'] . "'";
+
+										$sql = "SELECT COUNT(*) AS count_votes FROM votes WHERE candidate_id='" . $crow['id'] . "'";
 										$vote_query = $conn->query($sql);
 
 										if ($vote_query->num_rows > 0) {
 
 											$votes = $vote_query->fetch_assoc();
 
-											$votes['count'];
+											$candidate_votes = $votes['count_votes'];
 
-											$sql = "SELECT COUNT(*) AS total_votes FROM votes WHERE candidate_id='" . $crow['id'] . "'";
+											$sql = "SELECT COUNT(*) AS total_votes FROM votes WHERE position_id='" . $row['id'] . "'";
 											$tv_query = $conn->query($sql);
 
 											if ($tv_query->num_rows > 0) {
 
 												$total_votes = $tv_query->fetch_assoc();
 
-												if (!$total_votes['total_votes'] == 0) {
+												// die($total_votes['total_votes']);
 
-													$avarage = ($votes['count'] /	$total_votes['total_votes']) * 100;
+												if ($total_votes['total_votes'] != 0) {
+
+													$avarage = ($candidate_votes /	$total_votes['total_votes']) * 100;
 												} else {
 
 													$avarage = 0;
@@ -67,7 +94,7 @@
 
 
 												// echo $total_votes['total_votes'];
-												echo '<p style="font-size:14px;" class="h5 fs-8 mb-2 fw-bold">Votes :' .  $votes['count'] . ' </p>';
+												echo '<p style="font-size:14px;" class="h5 fs-8 mb-2 fw-bold">Votes :' .  $candidate_votes . ' </p>';
 												echo '<div class="progress-bar bg-warning" role="progressbar" aria-label="Example with label" style="width:' . $avarage . '%;" aria-valuenow="' . $avarage . '" aria-valuemin="0" aria-valuemax="100">' . $avarage . '%</div>';
 											}
 										}
