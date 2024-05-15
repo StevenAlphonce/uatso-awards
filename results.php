@@ -48,14 +48,23 @@
 
 											$votes['count'];
 
-											$sql = "SELECT COUNT(position_id) AS total_votes FROM votes ";
+											$sql = "SELECT COUNT(*) AS total_votes FROM votes WHERE candidate_id='" . $crow['id'] . "'";
 											$tv_query = $conn->query($sql);
 
 											if ($tv_query->num_rows > 0) {
 
 												$total_votes = $tv_query->fetch_assoc();
 
-												$avarage = ($votes['count'] /	$total_votes['total_votes']) * 100;
+												if (!$total_votes['total_votes'] == 0) {
+
+													$avarage = ($votes['count'] /	$total_votes['total_votes']) * 100;
+												} else {
+
+													$avarage = 0;
+												}
+
+
+
 
 												// echo $total_votes['total_votes'];
 												echo '<p style="font-size:14px;" class="h5 fs-8 mb-2 fw-bold">Votes :' .  $votes['count'] . ' </p>';
