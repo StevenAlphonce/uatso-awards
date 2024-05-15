@@ -48,7 +48,7 @@
 
 											$votes['count'];
 
-											$sql = "SELECT COUNT(*) AS total_votes FROM votes";
+											$sql = "SELECT COUNT(position_id) AS total_votes FROM votes ";
 											$tv_query = $conn->query($sql);
 
 											if ($tv_query->num_rows > 0) {
@@ -58,9 +58,8 @@
 												$avarage = ($votes['count'] /	$total_votes['total_votes']) * 100;
 
 												// echo $total_votes['total_votes'];
-												echo
-												'<div class="progress-bar bg-warning" role="progressbar" aria-label="Example with label" style="width:' . $avarage . '%;" aria-valuenow="' . $avarage . '" aria-valuemin="0" aria-valuemax="100">' . $avarage . '%</div>';
-												echo '<p class="fs-8 mb-2 fw-bold">Votes :' .  $votes['count'] . ' </p>';
+												echo '<p style="font-size:14px;" class="h5 fs-8 mb-2 fw-bold">Votes :' .  $votes['count'] . ' </p>';
+												echo '<div class="progress-bar bg-warning" role="progressbar" aria-label="Example with label" style="width:' . $avarage . '%;" aria-valuenow="' . $avarage . '" aria-valuemin="0" aria-valuemax="100">' . $avarage . '%</div>';
 											}
 										}
 
