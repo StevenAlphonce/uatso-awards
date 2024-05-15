@@ -11,9 +11,25 @@ if (isset($_SESSION['voter'])) {
 <?php include 'includes/header.php'; ?>
 
 <body class="hold-transition login-page">
-	<div class="login-box">
+
+	<header class="main-header bg-blue">
+
+		<!-- Header Navbar: style can be found in header.less -->
+		<nav class="navbar navbar-static-top">
+
+			<div class="navbar-custom-menu">
+				<ul style="margin-top: 10px;font-size:large;" class="nav navbar-nav">
+					<li><a style="color:white;background:unset; " href="results.php">SHOW RESULTS</a> </li>
+
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<div style="background-color: none;" class="login-box">
 		<div class="login-logo">
-			<b>UAUTS'o AWARDS 2024</b>
+			<!-- <b>UAUTS'o AWARDS 2024</b> -->
+			<img src="images/site-banner.jpg" alt="">
 		</div>
 
 		<div class="login-box-body">
@@ -30,7 +46,7 @@ if (isset($_SESSION['voter'])) {
 				</div>
 				<div class="row">
 					<div class="col-xs-4">
-						<button type="submit" class="btn btn-primary btn-block btn-flat" name="login"><i class="fa fa-sign-in"></i> Sign In</button>
+						<button type="submit" class="btn bg-blue btn-block btn-flat" name="login"><i class="fa fa-sign-in"></i> Sign In</button>
 					</div>
 				</div>
 			</form>
