@@ -49,16 +49,16 @@
 
 						while ($row = $query->fetch_assoc()) {
 							$position_name = $row['description']; // Assuming the position name field in your database is 'position_name'
-							echo '<div class="col-md-12 mb-4">';
+							echo '<div style="border:1px; margin-top:10px;" class="col-md-12 mb-4">';
 							echo '<h2>' . $position_name . '</h2>'; // Display the position name
 							$sql = "SELECT * FROM candidates WHERE position_id='" . $row['id'] . "'";
 							$cquery = $conn->query($sql);
 							while ($crow = $cquery->fetch_assoc()) {
 
 						?>
-								<div style="margin-top: 10px;" class="row shadow-md p-2 m-0 rounded shadow-md ">
+								<div style="border:1px solid blue; border-radius:9px; margin-top:10px;" class="row shadow-md p-2  rounded shadow-md ">
 									<div class="col-md-3">
-										<img class="rounded-pill max-130 p-2" src="images/profile.jpg" alt="">
+										<img style="border-radius: 50%;height:90px;" class="rounded-pill max-130 p-2" src="images/profile.jpg" alt="">
 									</div>
 									<div class="col-md-9 align-self-center">
 										<h4 class="mt-3 fs-5 mb-1 fw-bold"><?php echo $crow['firstname'] . ' ' . $crow['lastname']; ?></h4> <!-- Assuming candidate name field in your database is 'candidate_name' -->
@@ -84,7 +84,7 @@
 
 												if ($total_votes['total_votes'] != 0) {
 
-													$avarage = ($candidate_votes /	$total_votes['total_votes']) * 100;
+													$avarage = number_format(($candidate_votes /	$total_votes['total_votes']) * 100, 0, '.', '');
 												} else {
 
 													$avarage = 0;
@@ -95,7 +95,7 @@
 
 												// echo $total_votes['total_votes'];
 												echo '<p style="font-size:14px;" class="h5 fs-8 mb-2 fw-bold">Votes :' .  $candidate_votes . ' </p>';
-												echo '<div class="progress-bar bg-warning" role="progressbar" aria-label="Example with label" style="width:' . $avarage . '%;" aria-valuenow="' . $avarage . '" aria-valuemin="0" aria-valuemax="100">' . $avarage . '%</div>';
+												echo '<div class="progress-bar p-7 bg-warning" role="progressbar" aria-label="Example with label" style="width:' . $avarage . '%;" aria-valuenow="' . $avarage . '" aria-valuemin="0" aria-valuemax="100">' . $avarage . '%</div>';
 											}
 										}
 
