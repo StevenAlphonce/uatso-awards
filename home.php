@@ -55,6 +55,9 @@
 							</div>
 
 							<?php
+
+							$endtime = strtotime("2024-05-17");
+							$currenttime = time();
 							$sql = "SELECT * FROM votes WHERE voters_id = '" . $voter['id'] . "'";
 							$vquery = $conn->query($sql);
 							if ($vquery->num_rows > 0) {
@@ -66,47 +69,57 @@
 							<?php
 							} else {
 							?>
-								<!-- Voting Ballot -->
-								<form method="POST" id="ballotForm" action="submit_ballot.php">
-									<?php
-									include 'includes/slugify.php';
 
-									$candidate = '';
-									$sql = "SELECT * FROM positions ORDER BY priority ASC";
-									$query = $conn->query($sql);
-									while ($row = $query->fetch_assoc()) {
-										$sql = "SELECT * FROM candidates WHERE position_id='" . $row['id'] . "'";
-										$cquery = $conn->query($sql);
-										while ($crow = $cquery->fetch_assoc()) {
-											$slug = slugify($row['description']);
-											$checked = '';
-											if (isset($_SESSION['post'][$slug])) {
-												$value = $_SESSION['post'][$slug];
+								<?php if ($currenttime >= $endtime) {
+								?>
+									<div class="text-center">
+										<h3 style="color: red;margin-top:100px;">Sorry, the Election is over</h3>
+										<!-- <a href="#view" data-toggle="modal" class="btn btn-flat btn-primary btn-lg">View Ballot</a> -->
+									</div>
+								<?php
+								} else {
+								?>
+									<!-- Voting Ballot -->
+									<form method="POST" id="ballotForm" action="submit_ballot.php">
+										<?php
+										include 'includes/slugify.php';
 
-												if (is_array($value)) {
-													foreach ($value as $val) {
-														if ($val == $crow['id']) {
+										$candidate = '';
+										$sql = "SELECT * FROM positions ORDER BY priority ASC";
+										$query = $conn->query($sql);
+										while ($row = $query->fetch_assoc()) {
+											$sql = "SELECT * FROM candidates WHERE position_id='" . $row['id'] . "'";
+											$cquery = $conn->query($sql);
+											while ($crow = $cquery->fetch_assoc()) {
+												$slug = slugify($row['description']);
+												$checked = '';
+												if (isset($_SESSION['post'][$slug])) {
+													$value = $_SESSION['post'][$slug];
+
+													if (is_array($value)) {
+														foreach ($value as $val) {
+															if ($val == $crow['id']) {
+																$checked = 'checked';
+															}
+														}
+													} else {
+														if ($value == $crow['id']) {
 															$checked = 'checked';
 														}
 													}
-												} else {
-													if ($value == $crow['id']) {
-														$checked = 'checked';
-													}
 												}
-											}
-											$input = ($row['max_vote'] > 1) ? '<input type="checkbox" class="flat-red ' . $slug . '" name="' . $slug . "[]" . '" value="' . $crow['id'] . '" ' . $checked . '>' : '<input type="radio" class="flat-red ' . $slug . '" name="' . slugify($row['description']) . '" value="' . $crow['id'] . '" ' . $checked . '>';
-											$image = (!empty($crow['photo'])) ? 'images/' . $crow['photo'] : 'images/profile.jpg';
-											$candidate .= '
+												$input = ($row['max_vote'] > 1) ? '<input type="checkbox" class="flat-red ' . $slug . '" name="' . $slug . "[]" . '" value="' . $crow['id'] . '" ' . $checked . '>' : '<input type="radio" class="flat-red ' . $slug . '" name="' . slugify($row['description']) . '" value="' . $crow['id'] . '" ' . $checked . '>';
+												$image = (!empty($crow['photo'])) ? 'images/' . $crow['photo'] : 'images/profile.jpg';
+												$candidate .= '
 												<li>
 													' . $input . '<button type="button" class="btn btn-primary btn-sm btn-flat clist platform" data-platform="' . $crow['platform'] . '" data-fullname="' . $crow['firstname'] . ' ' . $crow['lastname'] . '"><i class="fa fa-search"></i> Platform</button><img src="' . $image . '" height="100px" width="100px" class="clist"><span class="cname clist">' . $crow['firstname'] . ' ' . $crow['lastname'] . '</span>
 												</li>
 											';
-										}
+											}
 
-										$instruct = ($row['max_vote'] > 1) ? 'You may select up to ' . $row['max_vote'] . ' candidates' : 'Select only one candidate';
+											$instruct = ($row['max_vote'] > 1) ? 'You may select up to ' . $row['max_vote'] . ' candidates' : 'Select only one candidate';
 
-										echo '
+											echo '
 											<div class="row">
 												<div class="col-xs-12">
 													<div class="box box-solid" id="' . $row['id'] . '">
@@ -130,16 +143,17 @@
 											</div>
 										';
 
-										$candidate = '';
-									}
+											$candidate = '';
+										}
 
-									?>
-									<div class="text-center">
-										<button type="button" class="btn btn-success btn-flat" id="preview"><i class="fa fa-file-text"></i> Preview</button>
-										<button type="submit" class="btn btn-primary btn-flat" name="vote"><i class="fa fa-check-square-o"></i> Submit</button>
-									</div>
-								</form>
-								<!-- End Voting Ballot -->
+										?>
+										<div class="text-center">
+											<button type="button" class="btn btn-success btn-flat" id="preview"><i class="fa fa-file-text"></i> Preview</button>
+											<button type="submit" class="btn btn-primary btn-flat" name="vote"><i class="fa fa-check-square-o"></i> Submit</button>
+										</div>
+									</form>
+									<!-- End Voting Ballot -->
+								<?php } ?>
 							<?php
 							}
 
