@@ -48,7 +48,7 @@
 						<?php if ($currenttime >= $endtime) {
 						?>
 							<div class="text-center">
-								<h3 style="color: red;margin-top:100px;">WELCOME TO UAUTSO NIGTH AWARDS</h3>
+								<h3 style="color: gold;margin-top:100px;font-weight:bolder; font-size:50px;">WELCOME TO UAUTSO NIGTH AWARDS</h3>
 								<!-- <a href="#view" data-toggle="modal" class="btn btn-flat btn-primary btn-lg">View Ballot</a> -->
 							</div>
 						<?php
