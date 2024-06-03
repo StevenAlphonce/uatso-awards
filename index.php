@@ -62,13 +62,13 @@ if (isset($_SESSION['voter'])) {
 
 		<div style="margin-top:20px" class="row">
 			<div class="col-2 bg-dark"></div>
-			<div class="col-6 text-center">
+			<!-- <div class="col-6 text-center">
 				<h3>afsaTech</h3>
 				<img style="height: 50px;" src="images/atlogo.png" alt="">
 				<p class="muted">We design information and technology products and solutions. </p>
 				<a style="cursor: pointer; color:blue;" href="https://www.facebook.com/afsaTech/"> Follow me on Facebook Page for suppurt</a><br>
 				<a style="cursor: pointer;" href=" +255743312745">Mobile : (+255) 0743 312 745</a>
-			</div>
+			</div> -->
 			<div class="col-2 bg-dark"></div>
 		</div>
 		<?php

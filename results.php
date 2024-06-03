@@ -37,7 +37,7 @@
 				<section class="content">
 
 					<?php
-					$endtime = strtotime("2024-05-17");
+					$endtime = strtotime("2024-06-30");
 					$currenttime = time();
 					$parse = parse_ini_file('admin/config.ini', FALSE, INI_SCANNER_RAW);
 					$title = $parse['election_title'];

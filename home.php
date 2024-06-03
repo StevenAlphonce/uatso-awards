@@ -56,7 +56,7 @@
 
 							<?php
 
-							$endtime = strtotime("2024-05-17");
+							$endtime = strtotime("2024-06-30");
 							$currenttime = time();
 							$sql = "SELECT * FROM votes WHERE voters_id = '" . $voter['id'] . "'";
 							$vquery = $conn->query($sql);
